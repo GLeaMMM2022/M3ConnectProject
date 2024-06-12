@@ -8,11 +8,13 @@ namespace M3ConnectProject.Models
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression(@"^[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+$", ErrorMessage = "Введите корректное ФИО (три слова, каждое с большой буквы).")]
+        [RegularExpression(@"^[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+$",
+            ErrorMessage = "Введите корректное ФИО (три слова, каждое с большой буквы).")]
         public string FullName { get; set; }
 
         [Required]
-        [RegularExpression(@"^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}$", ErrorMessage = "Введите корректный IP-адрес.")]
+        [RegularExpression(@"^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}$",
+            ErrorMessage = "Введите корректный IP-адрес.")]
         public string IpAddress { get; set; }
 
         [Required]

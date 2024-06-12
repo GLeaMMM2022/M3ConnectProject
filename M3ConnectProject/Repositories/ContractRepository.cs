@@ -4,28 +4,6 @@ using M3ConnectProject.Models;
 
 namespace M3ConnectProject.Repositories
 {
-    /*public class ContractRepository : IContractRepository
-    {
-        private readonly List<Contract> _contracts = new List<Contract>();
-
-        public IEnumerable<Contract> GetAll() => _contracts;
-
-        public Contract GetById(int id) => _contracts.FirstOrDefault(c => c.Id == id);
-
-        public void Add(Contract contract)
-        {
-            contract.Id = _contracts.Count + 1;
-            _contracts.Add(contract);
-        }
-
-        public void Update(Contract contract)
-        {
-            var index = _contracts.FindIndex(c => c.Id == contract.Id);
-            if (index >= 0) _contracts[index] = contract;
-        }
-
-        public void Delete(int id) => _contracts.RemoveAll(c => c.Id == id);
-    }*/
     public class ContractRepository : IContractRepository
     {
         private readonly List<Contract> _contracts = new List<Contract>();

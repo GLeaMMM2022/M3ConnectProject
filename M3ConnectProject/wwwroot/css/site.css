@@ -69,3 +69,25 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.jumbotron {
+    background-color: #f8f9fa;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    border-radius: 0.3rem;
+}
+
+    .jumbotron .display-4 {
+        font-size: 2.5rem;
+        font-weight: 300;
+    }
+
+    .jumbotron .lead {
+        font-size: 1.25rem;
+        font-weight: 300;
+    }
+
+    .jumbotron hr {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
