@@ -1,3 +1,4 @@
+using M3ConnectProject.Data;
 using M3ConnectProject.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +17,9 @@ namespace M3ConnectProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IContractRepository, ContractRepository>();
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IContractRepository, ContractRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
