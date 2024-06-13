@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\M3Connect.Db\M3Connect.Db.csproj" />
+  </ItemGroup>
+
 </Project>

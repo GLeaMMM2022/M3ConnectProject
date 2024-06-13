@@ -1,6 +1,8 @@
+using M3Connect.Db;
 using M3ConnectProject.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,8 +15,21 @@ namespace M3ConnectProject
 {
     public class Startup
     {
+        public Startup (IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            //получаем строку подключения из файла конфигурации
+            string connection = Configuration.GetConnectionString("contracts_data_base");
+            //добавляем DatabaseContext в качестве сервиса в приложении
+            services.AddDbContext<DatabaseContext>(options =>
+                options.UseSqlServer(connection));
+
             services.AddControllersWithViews();
             services.AddSingleton<IContractRepository, ContractRepository>();
         }
