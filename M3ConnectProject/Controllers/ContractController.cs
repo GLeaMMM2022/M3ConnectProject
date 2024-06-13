@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using M3ConnectProject.Models;
-using M3ConnectProject.Repositories;
 using System.Linq;
+using M3Connect.Db;
+using System;
+using M3Connect.Db.Models;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace M3ConnectProject.Controllers
 {
@@ -17,36 +21,72 @@ namespace M3ConnectProject.Controllers
         public IActionResult Index()
         {
             var contracts = _repository.GetAll();
-            return View(contracts);
+            var Contracts = new List<ContractViewModel>();
+            foreach (var contract in contracts)
+            {
+                Contracts.Add(new ContractViewModel()
+                {
+                    ContractDate = DateTime.Now,
+                    Id = contract.Id,
+                    FullName = contract.FullName,
+                    IpAddress = contract.IpAddress,
+                    IsActive = contract.IsActive,
+                    ServiceType = (Models.ServiceType)contract.ServiceType
+                });
+            }
+            return View(Contracts);
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(Guid? id)
         {
             if (id == null)
             {
-                return View(new Contract());
+                return View(new ContractViewModel());
             }
             var contract = _repository.GetById(id.Value);
+
+            var Contract = new ContractViewModel()
+            {
+                ContractDate = DateTime.Now,
+                Id = contract.Id,
+                FullName = contract.FullName,
+                IpAddress = contract.IpAddress,
+                IsActive = contract.IsActive,
+                ServiceType = (Models.ServiceType)contract.ServiceType
+
+            };
             if (contract == null)
             {
                 return NotFound();
             }
-            return View(contract);
+            return View(Contract);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Contract contract)
+        public IActionResult Edit(ContractViewModel contract)
         {
             if (ModelState.IsValid)
             {
-                if (contract.Id == 0)
+                var Contract = new M3Connect.Db.Models.Contract()
                 {
-                    _repository.Add(contract);
+                    ContractDate = DateTime.Now,
+                    Id = contract.Id,
+                    FullName = contract.FullName,
+                    IpAddress = contract.IpAddress,
+                    IsActive = contract.IsActive,
+                    ServiceType = (M3Connect.Db.Models.ServiceType)contract.ServiceType
+
+                };
+
+                if (contract.Id == null)
+                {
+                    
+                    _repository.Add(Contract);
                 }
                 else
                 {
-                    _repository.Update(contract);
+                    _repository.Update(Contract);
                 }
                 return RedirectToAction(nameof(Index)); // Перенаправляем на страницу Index
             }
@@ -54,7 +94,7 @@ namespace M3ConnectProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult ToggleStatus(int id)
+        public IActionResult ToggleStatus(Guid id)
         {
             var contract = _repository.GetById(id);
             if (contract != null)

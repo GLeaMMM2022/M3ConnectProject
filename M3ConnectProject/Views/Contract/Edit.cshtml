@@ -1,7 +1,7 @@
-﻿@model M3ConnectProject.Models.Contract
+﻿@model ContractViewModel
 
 @{
-    ViewData["Title"] = Model.Id == 0 ? "Добавить договор" : "Редактировать договор";
+    ViewData["Title"] = Model.Id == null ? "Добавить договор" : "Редактировать договор";
 }
 
 <h1>@ViewData["Title"]</h1>

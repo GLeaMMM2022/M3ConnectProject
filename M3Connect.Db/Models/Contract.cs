@@ -5,7 +5,7 @@ namespace M3Connect.Db.Models
 {
     public class Contract
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string FullName { get; set; }
        

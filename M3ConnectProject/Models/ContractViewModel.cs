@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace M3ConnectProject.Models
 {
-    public class Contract
+    public class ContractViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [RegularExpression(@"^[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+$",
